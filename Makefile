@@ -1,12 +1,9 @@
 CC           ?= gcc
 LD           ?= ld
 PREFIX       ?= /usr/local
-SYSROOT      ?= /usr/local
 INSTALL      ?= install
 
 INCLUDES     = $(SYSROOT)/include
-CFLAGS       = -Wall -Werror -std=gnu99 -Iinclude $(addprefix -I, $(INCLUDES))
-LDFLAGS      = -L$(SYSROOT)/lib
 LDLIBS       = -lexample
 
 TARGET       = appexample
@@ -17,7 +14,7 @@ OBJECTS      = $(SOURCES:.c=.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
+	$(CC) $^ $(LDLIBS) -o $@
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@
