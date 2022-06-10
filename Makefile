@@ -2,6 +2,7 @@ CC           ?= gcc
 LD           ?= ld
 PREFIX       ?= /usr/local
 SYSROOT      ?= /usr/local
+INSTALL      ?= install
 
 INCLUDES     = $(SYSROOT)/include
 CFLAGS       = -Wall -Werror -std=gnu99 -Iinclude $(addprefix -I, $(INCLUDES))
@@ -26,8 +27,8 @@ clean:
 	-rm -f $(OBJECTS)
 
 install:
-	-mkdir -p $(PREFIX)/bin
-	cp $(TARGET) $(PREFIX)/bin
+	$(INSTALL) -d $(PREFIX)/bin
+	$(INSTALL) $(TARGET) $(PREFIX)/bin
 
 test:
 	LD_LIBRARY_PATH=$(SYSROOT)/lib ./$(TARGET)
